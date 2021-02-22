@@ -29,8 +29,8 @@ def main() -> None:
     LOGGER.info("Starting %d threads.", ARGS.threads)
     with ThreadPoolExecutor(max_workers=ARGS.threads) as tpe:
         futures = []
-        for i, path in enumerate(ARGS.inputs):
-            if ".cue" in path:
+        for path in ARGS.inputs:
+            if path.endswith(".cue"):
                 collection = Cue(path)  # type: Collection
             elif os.path.isdir(path):
                 collection = Directory(path)
