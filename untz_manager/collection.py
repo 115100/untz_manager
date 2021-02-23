@@ -7,14 +7,6 @@ import subprocess
 import tempfile
 
 
-class Singlet:
-    def __init__(self, audio_file: str):
-        self.audio_file = audio_file
-
-    def __iter__(self) -> Iterator[str]:
-        yield self.audio_file
-
-
 class Directory:
     def __init__(self, directory: str):
         if not os.path.isdir(directory):

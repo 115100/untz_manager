@@ -6,7 +6,7 @@ import os
 
 from .encoder import Encoder, OpusEncoder, VorbisEncoder
 from .utils import get_args
-from .collection import Cue, Directory, Singlet
+from .collection import Cue, Directory
 
 LOGGER = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ def main() -> None:
             elif os.path.isdir(path):
                 collection = Directory(path)
             else:
-                collection = Singlet(path)
+                collection = [path]
 
             for entry in collection:
                 futures.append(tpe.submit(encoder.encode_file, entry))
