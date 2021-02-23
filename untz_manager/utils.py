@@ -1,9 +1,6 @@
 """Useful functions to use."""
 import argparse
 from multiprocessing import cpu_count
-import os
-import shutil
-from typing import Iterable
 
 from . import __version__
 
@@ -87,17 +84,3 @@ def get_args() -> argparse.Namespace:
     parser.add_argument(dest="inputs", help="List of folder/file inputs.", nargs="+")
 
     return parser.parse_args()
-
-
-def recursive_file_search(entry: str) -> Iterable[str]:
-    """Recursively yield paths of all files in `entry`.
-
-    Args:
-        entry (str): Folder to walk.
-
-    Yields:
-        str, paths to all file entries.
-    """
-    for root, _, files in os.walk(entry):
-        for file_entry in files:
-            yield os.path.join(root, file_entry)

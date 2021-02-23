@@ -1,6 +1,5 @@
 """Implementation of collections of music files"""
-from types import TracebackType
-from typing import Iterator, List, Optional, Type
+from typing import Iterator
 import glob
 import os
 import re

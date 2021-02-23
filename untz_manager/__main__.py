@@ -2,10 +2,9 @@
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import os
-from typing import Callable
 
 from .encoder import Encoder, OpusEncoder, VorbisEncoder
-from .utils import get_args, recursive_file_search
+from .utils import get_args
 from .collection import Collection, Cue, Directory, Singlet
 
 LOGGER = logging.getLogger(__name__)
