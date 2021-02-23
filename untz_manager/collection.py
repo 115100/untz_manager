@@ -7,12 +7,7 @@ import subprocess
 import tempfile
 
 
-class Collection:
-    def __iter__(self) -> Iterator[str]:
-        raise NotImplementedError
-
-
-class Singlet(Collection):
+class Singlet:
     def __init__(self, audio_file: str):
         self.audio_file = audio_file
 
@@ -20,7 +15,7 @@ class Singlet(Collection):
         yield self.audio_file
 
 
-class Directory(Collection):
+class Directory:
     def __init__(self, directory: str):
         if not os.path.isdir(directory):
             raise ValueError("{} is not a directory".format(directory))
@@ -30,7 +25,7 @@ class Directory(Collection):
         return glob.iglob(f"{self.directory}/**/*.flac", recursive=True)
 
 
-class Cue(Collection):
+class Cue:
     def __init__(self, cue_path: str):
         # We rely on garbage collection to clean this up.
         # An explicit cleanup can also work but makes the code a little messier.

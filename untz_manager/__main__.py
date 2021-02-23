@@ -1,11 +1,12 @@
 """Main entry point for untz."""
 from concurrent.futures import ThreadPoolExecutor
+from typing import Iterable
 import logging
 import os
 
 from .encoder import Encoder, OpusEncoder, VorbisEncoder
 from .utils import get_args
-from .collection import Collection, Cue, Directory, Singlet
+from .collection import Cue, Directory, Singlet
 
 LOGGER = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def main() -> None:
         futures = []
         for path in ARGS.inputs:
             if path.endswith(".cue"):
-                collection = Cue(path)  # type: Collection
+                collection = Cue(path)  # type: Iterable[str]
             elif os.path.isdir(path):
                 collection = Directory(path)
             else:
