@@ -36,14 +36,14 @@ class Encoder:
                     oggenc_macros[macro] = afp.tags.get(tag, ["(none)"])[0]
             # Artist tag is non-standard, so get the first one that matches
             oggenc_macros["%a"] = (
-                afp.tags.get("ALBUM_ARTIST", [None])[0]
-                or afp.tags.get("ALBUMARTIST", [None])[0]
-                or afp.tags.get("ALBUM ARTIST", [None])[0]
-                or afp.tags.get("COMPOSER", [None])[0]
-                or afp.tags.get("PERFORMER", [None])[0]
-                or afp.tags.get("ARTIST", [None])[0]
-                or "Unknown artist"
-            )
+                afp.tags.get("ALBUM_ARTIST", [])
+                or afp.tags.get("ALBUMARTIST", [])
+                or afp.tags.get("ALBUM ARTIST", [])
+                or afp.tags.get("COMPOSER", [])
+                or afp.tags.get("PERFORMER", [])
+                or afp.tags.get("ARTIST", [])
+                or ["Unknown artist"]
+            )[0]
             oggenc_macros["%l"] = afp.tags.get("ALBUM", ["Unknown album"])[0]
         finally:
             afp.close()
