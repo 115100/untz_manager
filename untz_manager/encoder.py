@@ -110,8 +110,13 @@ class VorbisEncoder(Encoder):
         super().__init__(base_dir=base_dir, pattern=pattern, ext="ogg")
 
     def _run_encoder(self, audio_file: str, output_filename: str) -> None:
-        process_args = ["oggenc", "-q", str(self.quality), "-o", output_filename]
-        process_args.append(audio_file)
-
+        process_args = [
+            "oggenc",
+            "-q",
+            str(self.quality),
+            "-o",
+            output_filename,
+            audio_file,
+        ]
         self.logger.debug('Running "%s".', " ".join(process_args))
         subprocess.run(process_args, capture_output=True, check=True)
