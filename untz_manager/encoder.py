@@ -59,9 +59,7 @@ class Encoder:
         oggenc_macros = self._get_vorbis_comments(audio_file)
 
         # Handle patterns on our side.
-        output_filename = "{base_dir}/%a/%l/{pattern}.{ext}".format(
-            base_dir=self.base_dir, pattern=self.pattern, ext=self.ext
-        )
+        output_filename = f"{self.base_dir}/%a/%l/{self.pattern}.{self.ext}"
         for macro, value in oggenc_macros.items():
             output_filename = output_filename.replace(
                 macro, re.sub(r"[\"*/:<>?\\|]", "_", value)

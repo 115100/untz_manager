@@ -10,7 +10,7 @@ import tempfile
 class Directory:
     def __init__(self, directory: str):
         if not os.path.isdir(directory):
-            raise ValueError("{} is not a directory".format(directory))
+            raise ValueError(f"{directory} is not a directory")
         self.directory = directory
 
     def __iter__(self) -> Iterator[str]:

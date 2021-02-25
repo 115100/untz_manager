@@ -24,7 +24,7 @@ def main() -> None:
     elif ARGS.encoder == "vorbis":
         encoder = VorbisEncoder(ARGS.base_dir, ARGS.pattern, ARGS.quality)
     else:
-        raise ValueError("invalid encoder: {}".format(ARGS.encoder))
+        raise ValueError(f"invalid encoder: {ARGS.encoder}")
 
     LOGGER.info("Starting %d threads.", ARGS.threads)
     with ThreadPoolExecutor(max_workers=ARGS.threads) as tpe:
