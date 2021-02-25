@@ -2,13 +2,11 @@
 import logging
 import os
 import re
-import signal
 import subprocess
-import sys
 import threading
 from typing import List, Mapping, Set
 
-import taglib  # type: ignore
+import taglib
 
 
 class Encoder:
@@ -29,7 +27,7 @@ class Encoder:
         )
 
         try:
-            afp = taglib.File(audio_file)  # pylint: disable=E1103
+            afp = taglib.File(audio_file)  # pylint: disable=I1101
             self.logger.debug('Tags: "%s".', afp.tags)
 
             oggenc_macros = {}

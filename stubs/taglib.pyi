@@ -1,0 +1,6 @@
+from typing import Dict
+
+class File:
+    tags: Dict[str, str]
+    def __init__(self, file_name: str): ...
+    def close(self) -> None: ...
