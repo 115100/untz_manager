@@ -17,7 +17,7 @@ class Directory:
         return glob.iglob(f"{self.directory}/**/*.flac", recursive=True)
 
 
-class Cue:
+class Cue(Directory):
     def __init__(self, cue_path: str):
         # We rely on garbage collection to clean this up.
         # An explicit cleanup can also work but makes the code a little messier.
@@ -70,5 +70,4 @@ class Cue:
             check=True,
         )
 
-    def __iter__(self) -> Iterator[str]:
-        return glob.iglob(f"{self._dir.name}/*.flac")
+        super().__init__(directory=self._dir.name)
