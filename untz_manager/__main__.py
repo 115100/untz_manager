@@ -44,3 +44,4 @@ def main() -> None:
 
     if ARGS.replaygain:
         encoder.apply_gain()
+    os.sync()
