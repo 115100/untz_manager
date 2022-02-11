@@ -14,7 +14,7 @@ class Directory:
         self.directory = directory
 
     def __iter__(self) -> Iterator[str]:
-        return glob.iglob(f"{self.directory}/**/*.flac", recursive=True)
+        return glob.iglob(f"{glob.escape(self.directory)}/**/*.flac", recursive=True)
 
 
 class Cue(Directory):
