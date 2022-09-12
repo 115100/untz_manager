@@ -1,8 +1,7 @@
 """Useful functions to use."""
 import argparse
 from multiprocessing import cpu_count
-
-from . import __version__
+from importlib.metadata import version
 
 
 def get_args() -> argparse.Namespace:
@@ -78,7 +77,7 @@ def get_args() -> argparse.Namespace:
         "-V",
         "--version",
         action="version",
-        version=__version__,
+        version=version("untz_manager"),
         help="Print version and exit.",
     )
     parser.add_argument(dest="inputs", help="List of folder/file inputs.", nargs="+")

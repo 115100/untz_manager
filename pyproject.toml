@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "untz_manager"
+version = "4.0.0"
+dependencies = [
+    "pytaglib",
+]
+
+[project.scripts]
+untz = "untz_manager.__main__:main"
+
+[tool.setuptools]
+packages = ["untz_manager"]
