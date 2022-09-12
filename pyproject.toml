@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "untz_manager"
-version = "4.0.0"
+version = "4.0.1"
 dependencies = [
     "pytaglib",
 ]
@@ -14,3 +14,8 @@ untz = "untz_manager.__main__:main"
 
 [tool.setuptools]
 packages = ["untz_manager"]
+
+[tool.mypy]
+mypy_path = "stubs"
+warn_return_any = true
+warn_unused_configs = true
