@@ -81,9 +81,10 @@ class Encoder:
 
     def apply_gain(self) -> None:
         """Run gain tagging on base_dir."""
-        process_args = ["rgbpm", self.base_dir]
-        self.logger.debug('Running "%s".', " ".join(process_args))
-        subprocess.run(process_args, capture_output=True, check=True)
+        for output_dir in self.output_dirs:
+            process_args = ["rgbpm", "-b", output_dir]
+            self.logger.debug('Running "%s".', " ".join(process_args))
+            subprocess.run(process_args, capture_output=True, check=True)
 
 
 class OpusEncoder(Encoder):
