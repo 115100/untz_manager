@@ -28,8 +28,8 @@ You may need additional codecs depending on what format your source audio is.
 
 Afterwards, install this package with
 
-```python
-python setup.py install
+```shell
+pip3 install .
 ```
 
 which will install untz and the [Pytaglib](https://github.com/supermihi/pytaglib) dependency.
