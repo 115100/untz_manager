@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "untz_manager"
-version = "4.0.3"
+version = "5.0.0"
 dependencies = [
     "pytaglib",
 ]
