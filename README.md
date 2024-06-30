@@ -14,7 +14,7 @@ root/
 
 This requires
 - [Taglib](http://taglib.github.io/)
-- [loudgain/rgbpm](https://github.com/Moonbase59/loudgain)
+- [rsgain](https://github.com/complexlogic/rsgain)
 - [Flac](https://xiph.org/flac/)
 
 Opus encoding requires [opus-tools](https://opus-codec.org/downloads/).

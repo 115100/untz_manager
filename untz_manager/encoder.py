@@ -79,10 +79,10 @@ class Encoder:
     def _process_args(self, audio_file: str, output_filename: str) -> List[str]:
         raise NotImplementedError
 
-    def apply_gain(self) -> None:
+    def apply_gain(self, threads: int) -> None:
         """Run gain tagging on base_dir."""
         for output_dir in self.output_dirs:
-            process_args = ["rgbpm", "-b", output_dir]
+            process_args = ["rsgain", "easy", "-m", str(threads), output_dir]
             self.logger.debug('Running "%s".', " ".join(process_args))
             subprocess.run(process_args, capture_output=True, check=True)
 

@@ -43,5 +43,5 @@ def main() -> None:
             future.result()
 
     if ARGS.replaygain:
-        encoder.apply_gain()
+        encoder.apply_gain(threads=ARGS.threads)
     os.sync()
