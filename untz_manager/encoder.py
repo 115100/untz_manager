@@ -1,4 +1,5 @@
 """Encoding related operations"""
+
 import logging
 import os
 import re
@@ -26,11 +27,10 @@ class Encoder:
             ("%d", "DATE"),
         )
 
-        try:
-            afp = taglib.File(audio_file)  # pylint: disable=I1101
+        oggenc_macros = {}
+        with taglib.File(audio_file) as afp:
             self.logger.debug('Tags: "%s".', afp.tags)
 
-            oggenc_macros = {}
             for macro, tag in macros:
                 if macro in self.pattern:
                     oggenc_macros[macro] = afp.tags.get(tag, ["(none)"])[0]
@@ -45,8 +45,6 @@ class Encoder:
                 or ["Unknown artist"]
             )[0]
             oggenc_macros["%l"] = afp.tags.get("ALBUM", ["Unknown album"])[0]
-        finally:
-            afp.close()
 
         return oggenc_macros
 
