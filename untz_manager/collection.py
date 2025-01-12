@@ -1,4 +1,5 @@
 """Implementation of collections of music files"""
+
 from typing import Iterator
 import glob
 import os

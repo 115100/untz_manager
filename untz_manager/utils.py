@@ -1,4 +1,5 @@
 """Useful functions to use."""
+
 import argparse
 from multiprocessing import cpu_count
 from importlib.metadata import version

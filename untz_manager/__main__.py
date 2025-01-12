@@ -1,4 +1,5 @@
 """Main entry point for untz."""
+
 from concurrent.futures import ThreadPoolExecutor
 from typing import Iterable
 import logging
@@ -18,9 +19,7 @@ def main() -> None:
         logging.basicConfig(level=logging.DEBUG)
 
     if ARGS.encoder == "opus":
-        encoder = OpusEncoder(
-            ARGS.base_dir, ARGS.pattern, ARGS.bitrate
-        )  # type: Encoder
+        encoder: Encoder = OpusEncoder(ARGS.base_dir, ARGS.pattern, ARGS.bitrate)
     elif ARGS.encoder == "vorbis":
         encoder = VorbisEncoder(ARGS.base_dir, ARGS.pattern, ARGS.quality)
     else:
@@ -31,7 +30,7 @@ def main() -> None:
         futures = []
         for path in ARGS.inputs:
             if path.endswith(".cue"):
-                collection = Cue(path)  # type: Iterable[str]
+                collection: Iterable[str] = Cue(path)
             elif os.path.isdir(path):
                 collection = Directory(path)
             else:
