@@ -18,12 +18,13 @@ def main() -> None:
     if ARGS.verbose:
         logging.basicConfig(level=logging.DEBUG)
 
-    if ARGS.encoder == "opus":
-        encoder: Encoder = OpusEncoder(ARGS.base_dir, ARGS.pattern, ARGS.bitrate)
-    elif ARGS.encoder == "vorbis":
-        encoder = VorbisEncoder(ARGS.base_dir, ARGS.pattern, ARGS.quality)
-    else:
-        raise ValueError(f"invalid encoder: {ARGS.encoder}")
+    match ARGS.encoder:
+        case "opus":
+            encoder: Encoder = OpusEncoder(ARGS.base_dir, ARGS.pattern, ARGS.bitrate)
+        case "vorbis":
+            encoder = VorbisEncoder(ARGS.base_dir, ARGS.pattern, ARGS.quality)
+        case _:
+            raise ValueError(f"invalid encoder: {ARGS.encoder}")
 
     LOGGER.info("Starting %d threads.", ARGS.threads)
     with ThreadPoolExecutor(max_workers=ARGS.threads) as tpe:
