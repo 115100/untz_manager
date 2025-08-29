@@ -70,11 +70,11 @@ class Encoder:
                 os.makedirs(target_path)
                 self.logger.debug('Created "%s".', target_path)
 
-        process_args = self._process_args(audio_file, output_filename)
+        process_args = self._encoder_args(audio_file, output_filename)
         self.logger.debug('Running "%s".', " ".join(process_args))
         subprocess.run(process_args, capture_output=True, check=True)
 
-    def _process_args(self, audio_file: str, output_filename: str) -> List[str]:
+    def _encoder_args(self, audio_file: str, output_filename: str) -> List[str]:
         raise NotImplementedError
 
     def apply_gain(self, threads: int) -> None:
@@ -90,7 +90,7 @@ class OpusEncoder(Encoder):
         self.bitrate = bitrate
         super().__init__(base_dir=base_dir, pattern=pattern, ext="opus")
 
-    def _process_args(self, audio_file: str, output_filename: str) -> List[str]:
+    def _encoder_args(self, audio_file: str, output_filename: str) -> List[str]:
         return [
             "opusenc",
             "--bitrate",
@@ -105,7 +105,7 @@ class VorbisEncoder(Encoder):
         self.quality = quality
         super().__init__(base_dir=base_dir, pattern=pattern, ext="ogg")
 
-    def _process_args(self, audio_file: str, output_filename: str) -> List[str]:
+    def _encoder_args(self, audio_file: str, output_filename: str) -> List[str]:
         return [
             "oggenc",
             "-q",
