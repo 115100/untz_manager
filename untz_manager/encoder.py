@@ -72,17 +72,33 @@ class Encoder:
 
         process_args = self._encoder_args(audio_file, output_filename)
         self.logger.debug('Running "%s".', " ".join(process_args))
-        subprocess.run(process_args, capture_output=True, check=True)
-
-    def _encoder_args(self, audio_file: str, output_filename: str) -> List[str]:
-        raise NotImplementedError
+        self._run_command(process_args)
 
     def apply_gain(self, threads: int) -> None:
         """Run gain tagging on base_dir."""
         for output_dir in self.output_dirs:
             process_args = ["rsgain", "easy", "-m", str(threads), output_dir]
             self.logger.debug('Running "%s".', " ".join(process_args))
-            subprocess.run(process_args, capture_output=True, check=True)
+            self._run_command(process_args)
+
+    def _encoder_args(self, audio_file: str, output_filename: str) -> List[str]:
+        raise NotImplementedError
+
+    def _run_command(self, process_args: List[str]) -> None:
+        try:
+            subprocess.run(
+                process_args,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                check=True,
+            )
+        except subprocess.CalledProcessError as e:
+            self.logger.error(
+                "Failed to run process '%s': %s",
+                " ".join(process_args),
+                e.stdout.decode("utf-8"),
+            )
+            raise e
 
 
 class OpusEncoder(Encoder):
