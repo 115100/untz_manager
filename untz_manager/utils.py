@@ -8,32 +8,30 @@ from importlib.metadata import version
 def get_args() -> argparse.Namespace:
     """Parse and return arguments."""
     parser = argparse.ArgumentParser(
-        description="Convert FLACs and sort into a sensible folder hierarchy."
+        description="Convert FLACs and sort into a sensible folder hierarchy",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "-d",
         "--base",
         dest="base_dir",
-        help="Base directory to store output files to.",
+        help="base directory to store output files to",
         required=True,
     )
     parser.add_argument(
         "-e",
         "--encoder",
-        default="vorbis",
+        default="opus",
         dest="encoder",
         choices=["opus", "vorbis"],
-        help='Encoder to use. Defaults to "vorbis".',
+        help="encoder to use",
     )
     parser.add_argument(
         "-n",
         "--names",
         default="%n - %t",
         dest="pattern",
-        help="Produce filenames as this string, with %%g, %%a, %%l, %%n, %%t, %%d "
-        "replaced by genre, artist, album, track number, title, "
-        "and date, respectively. Also, %%%% gives a literal %%. "
-        "Defaults to %%n - %%t.",
+        help="produce filenames as this string, with %%g (genre), %%a (artist), %%l (album), %%n (track number), %%t (title), %%d (date)",
     )
     parser.add_argument(
         "-q",
@@ -41,8 +39,7 @@ def get_args() -> argparse.Namespace:
         dest="quality",
         type=float,
         default=10,
-        help="Sets encoding quality to n, between -1 (low) and 10 (high)."
-        "Fractional quality levels such as 2.5 are permitted. Only valid for Vorbis encoder.",
+        help="sets vorbis encoding quality to n, between -1 (low) and 10 (high)",
     )
     parser.add_argument(
         "-b",
@@ -50,14 +47,14 @@ def get_args() -> argparse.Namespace:
         dest="bitrate",
         type=int,
         default=192,
-        help="Sets target bitrate in kbps. Only valid for Opus encoder. Defaults to 192.",
+        help="sets opus target bitrate in kbps",
     )
     parser.add_argument(
         "-r",
         "--replaygain",
         dest="replaygain",
         action="store_true",
-        help="Apply replaygain tags.",
+        help="apply replaygain tags",
     )
     parser.add_argument(
         "-t",
@@ -65,22 +62,22 @@ def get_args() -> argparse.Namespace:
         dest="threads",
         type=int,
         default=cpu_count(),
-        help="Thread pool size to spawn.",
+        help="thread pool size to spawn",
     )
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
         dest="verbose",
-        help="Set verbose logging.",
+        help="set verbose logging",
     )
     parser.add_argument(
         "-V",
         "--version",
         action="version",
         version=version("untz_manager"),
-        help="Print version and exit.",
+        help="print version and exit",
     )
-    parser.add_argument(dest="inputs", help="List of folder/file inputs.", nargs="+")
+    parser.add_argument(dest="inputs", help="list of folder/file inputs", nargs="+")
 
     return parser.parse_args()
