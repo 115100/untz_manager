@@ -4,6 +4,8 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Iterable
 import logging
 import os
+import subprocess
+import warnings
 
 from .encoder import Encoder, OpusEncoder, VorbisEncoder
 from .utils import get_args
@@ -40,7 +42,15 @@ def main() -> None:
             for entry in collection:
                 futures.append(tpe.submit(encoder.encode_file, entry))
         for future in futures:
-            future.result()
+            try:
+                future.result()
+            except subprocess.CalledProcessError as e:
+                if ARGS.threads > 1:
+                    warnings.warn(
+                        "some filesystems do not support concurrent file writes",
+                        RuntimeWarning,
+                    )
+                raise e
 
     if ARGS.replaygain:
         encoder.apply_gain(threads=ARGS.threads)
